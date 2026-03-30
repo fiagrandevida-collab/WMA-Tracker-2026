@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <script>
+        function updateTime() {
+            const timeZones = {
+                "UTC": new Date(),
+                "GMT-5": new Date(new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })),
+                "GMT+1": new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Berlin' })),
+                "GMT+5:30": new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }))
+            };
+
+            let display = '';
+            for (let zone in timeZones) {
+                display += `<p>${zone}: ${timeZones[zone].toISOString().slice(0, 19).replace('T', ' ')}</p>`;
+            }
+
+            document.getElementById('clocks').innerHTML = display;
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</head>
+<body>
+    <h1>Current Time in Different Time Zones</h1>
+    <div id="clocks"></div>
+</body>
+</html>
